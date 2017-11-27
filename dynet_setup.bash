@@ -1,8 +1,8 @@
 #!/bin/bash
 # Code to easily set up DyNet on a new GCE instance w/ CUDA. Mostly replicated from DyNet tutorial.
 
-apt-get update
-apt-get install python-pip build-essential cmake mercurial
+apt-get -y update
+apt-get install -y python-pip build-essential cmake mercurial
 
 pip install --upgrade pip
 pip install cython
@@ -10,6 +10,10 @@ pip install cython
 mkdir dynet-base
 cd dynet-base
 
+CUDA_VERSION_MAJOR="8" CUDA_VERSION_MINOR="0"
+CUDA_PKG_LONGVERSION="${CUDA_VERSION_MAJOR}.${CUDA_VERSION_MINOR}.61-1"
+CUDA_PKG_VERSION="${CUDA_VERSION_MAJOR}-${CUDA_VERSION_MINOR}"
+CUDA_REPO_PKG=cuda-repo-ubuntu1404_${CUDA_PKG_LONGVERSION}_amd64.deb
 wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1404/x86_64/$CUDA_REPO_PKG
 dpkg -i $CUDA_REPO_PKG
 apt-get -y update
