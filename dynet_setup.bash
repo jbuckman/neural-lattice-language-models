@@ -7,7 +7,7 @@ apt-get install -y python-pip build-essential cmake mercurial
 pip install --upgrade pip
 pip install cython
 
-mkdir dynet-base
+mkdir -p dynet-base
 cd dynet-base
 
 CUDA_VERSION_MAJOR="8" CUDA_VERSION_MINOR="0"
@@ -23,7 +23,7 @@ ln -s /usr/local/cuda-${CUDA_VERSION_MAJOR}.${CUDA_VERSION_MINOR} /usr/local/cud
 git clone https://github.com/clab/dynet.git
 hg clone https://bitbucket.org/eigen/eigen -r 699b659
 cd dynet
-mkdir build
+mkdir -p build
 cd build
 
 cmake .. -DEIGEN3_INCLUDE_DIR=../../eigen -DPYTHON=`which python` -DBACKEND=cuda
