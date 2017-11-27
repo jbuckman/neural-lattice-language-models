@@ -213,7 +213,6 @@ for epoch_i in range(args.epochs):
     print "done."
 
     for i, batch in enumerate(train_batches):
-        print i, len(batch), len(batch[0])
         args.update_num += 1
         dynet.renew_cg()
         result = lm.process_batch(batch, training=True)
