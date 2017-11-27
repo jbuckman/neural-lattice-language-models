@@ -6,12 +6,12 @@ mkdir en/bpe/heldout
 
 for i in $(seq -f "%02g" 1 99)
 do
-  python subword-nmt/apply_bpe.py -c en/codes.txt --vocabulary en/bpe_vocab.txt --vocabulary-threshold 50 < en/raw/train/news.en-000$i-of-00100 > en/bpe/train/news.en-000$i-of-00100 &
+  python apply_bpe.py -c en/codes.txt --vocabulary en/bpe_vocab.txt --vocabulary-threshold 50 < en/raw/train/news.en-000$i-of-00100 > en/bpe/train/news.en-000$i-of-00100 &
 done
 
 for i in $(seq -f "%02g" 1 49)
 do
-  python subword-nmt/apply_bpe.py -c en/codes.txt --vocabulary en/bpe_vocab.txt --vocabulary-threshold 50 < en/raw/heldout/news.en.heldout-000$i-of-00050 > en/bpe/heldout/news.en.heldout-000$i-of-00050 &
+  python apply_bpe.py -c en/codes.txt --vocabulary en/bpe_vocab.txt --vocabulary-threshold 50 < en/raw/heldout/news.en.heldout-000$i-of-00050 > en/bpe/heldout/news.en.heldout-000$i-of-00050 &
 done
 
 mkdir en/bpe/valid
