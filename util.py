@@ -70,7 +70,7 @@ def get_batches(data, max_size):
             current_count = 0
             current_start = i
         current_count += 1
-    ans.append(data[current_start: i+1])
+    ans.append(data[current_start:])
     return ans
 
 def shuffle_preserve_first(l,n=1):
