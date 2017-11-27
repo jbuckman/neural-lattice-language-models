@@ -137,7 +137,7 @@ if args.experiment:
     if args.minibatch_size is None:    args.minibatch_size = 40
     if args.epochs is None:
         if args.zh:                    args.epochs = 10
-        else:                          args.epochs = 3
+        else:                          args.epochs = 1
 
 if args.evaluate:
     if args.minibatch_size is None:    args.minibatch_size = 40
@@ -163,7 +163,7 @@ if not args.evaluate and not args.debug:
     train_data = util.load_data(args.train_data, DATA_VIEW, args.start_token, args.end_token)
     valid_data = util.load_data(args.valid_data, DATA_VIEW, args.start_token, args.end_token)
 else:
-    train_data = None
+    train_data = valid_data = None
 
 vocab = Vocab.load_from_data(train_data, save_cached=True,
                              load_cached=not args.rebuild_vocab,

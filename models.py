@@ -144,7 +144,7 @@ class LatticeLanguageModel(object):
         # paths represent the different connections within the lattice. paths[i] contains all the state/chunk pairs that
         #  end at index i
         paths = [[] for _ in range(len(sents))]
-        paths[0] = [(self.rnn.fresh_state(init_to_zero=True), [sents[0]], dynet.scalarInput(0.0))]
+        paths[0] = [(self.rnn.fresh_state(init_to_zero=True), [sents[0]], dynet.scalarInput(0.0, device=self.args.param_device))]
         for tok_i in range(len(sents)-1):
             # calculate the total probability of reaching this state
             _, _, lps = zip(*paths[tok_i])
@@ -202,14 +202,14 @@ class LatticeLanguageModel(object):
         for sent_i in range(len(batch)): ending_masks[batch[sent_i].index(self.lattice_vocab.end_token.s)][sent_i] = 1.0
 
         # put together all of the final path states to get the final error
-        cum_lp = dynet.scalarInput(0.0)
+        cum_lp = dynet.scalarInput(0.0, device=self.args.param_device)
         for path, mask in zip(paths, ending_masks):
             if max(mask) == 1:
                 assert len(path) != 0
                 _, _, lps = zip(*path)
                 if len(lps) == 1: local_cum_lp = lps[0]
                 else:             local_cum_lp = dynet.logsumexp(list(lps))
-                cum_lp += local_cum_lp * dynet.inputTensor(mask, batched=True)
+                cum_lp += local_cum_lp * dynet.inputTensor(mask, batched=True, device=self.args.param_device)
 
         if debug: return paths
 
@@ -282,7 +282,7 @@ class LatticeLanguageModel(object):
         lps = []
         state = self.lattice_rnn.initial_state(dropout=self.DROPOUT)
         cs = [[self.lattice_vocab.chunk_start.i] * self.BATCH_SIZE] + chunk_batch
-        cum_lp = dynet.scalarInput(0.0)
+        cum_lp = dynet.scalarInput(0.0, device=self.args.param_device)
         for i, (cc, nc) in enumerate(zip(cs, cs[1:])):
             if self.args.concat_context_vector:
                 x_t = dynet.pick_batch(self.vocab_R, cc)
