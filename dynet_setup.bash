@@ -10,6 +10,10 @@ pip install cython
 mkdir -p dynet-base
 cd dynet-base
 
+add-apt-repository -y ppa:graphics-drivers/ppa
+apt-get -y update
+apt-get install -y nvidia-384 nvidia-384-dev nvidia-modprobe nvidia-opencl-icd-384 nvidia-settings
+
 CUDA_VERSION_MAJOR="8" CUDA_VERSION_MINOR="0"
 CUDA_PKG_LONGVERSION="${CUDA_VERSION_MAJOR}.${CUDA_VERSION_MINOR}.61-1"
 CUDA_PKG_VERSION="${CUDA_VERSION_MAJOR}-${CUDA_VERSION_MINOR}"
@@ -19,6 +23,7 @@ dpkg -i $CUDA_REPO_PKG
 apt-get -y update
 apt-get install -y --no-install-recommends cuda-drivers cuda-core-$CUDA_PKG_VERSION cuda-cudart-dev-$CUDA_PKG_VERSION cuda-cublas-dev-$CUDA_PKG_VERSION cuda-curand-dev-$CUDA_PKG_VERSION
 ln -s /usr/local/cuda-${CUDA_VERSION_MAJOR}.${CUDA_VERSION_MINOR} /usr/local/cuda
+
 
 git clone https://github.com/clab/dynet.git
 hg clone https://bitbucket.org/eigen/eigen -r 699b659
