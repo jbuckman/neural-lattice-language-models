@@ -1,0 +1,1 @@
+# Contains the outputs of the logfiles for the training runs.
