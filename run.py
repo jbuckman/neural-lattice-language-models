@@ -59,13 +59,13 @@ args = util.AttrDict(vars(parser.parse_args()))
 print "Args:", args
 
 if args.ptb:
-    DATA_LOC = '../data/ptb'
+    DATA_LOC = 'data/ptb'
     DATA_VIEW = 'word'
 elif args.zh:
-    DATA_LOC = '../data/zh'
+    DATA_LOC = 'data/zh'
     DATA_VIEW = 'char'
 else:
-    DATA_LOC = '../data/en/bpe'
+    DATA_LOC = 'data/en/bpe'
     DATA_VIEW = 'word'
 
 args.train_data = DATA_LOC + '/train'
