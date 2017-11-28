@@ -1,0 +1,1 @@
+python run.py --zh --experiment --dynet-devices CPU,GPU:4,GPU:5 --actual-devices=GPU:4,GPU:4,GPU:5,GPU:5 --mode=baseline --size=large --name=baseline_zh

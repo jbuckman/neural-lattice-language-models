@@ -1,0 +1,1 @@
+python run.py --zh --experiment --dynet-devices CPU,GPU:6,GPU:7 --actual-devices=GPU:6,GPU:6,GPU:7,GPU:7 --mode=lattice --lattice_size=1 --size=large --name=lat1_zh
