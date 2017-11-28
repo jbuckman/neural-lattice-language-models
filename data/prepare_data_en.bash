@@ -20,5 +20,6 @@ done
 mkdir -p en/bpe/valid
 mkdir -p en/bpe/test
 
+chmod 777 . -R
 cp en/bpe/heldout/* en/bpe/test
 mv en/bpe/test/news.en.heldout-00001-of-00050 en/bpe/valid

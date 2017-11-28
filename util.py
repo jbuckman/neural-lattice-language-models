@@ -59,13 +59,13 @@ def itersubclasses(cls, _seen=None):
             for sub in itersubclasses(sub, _seen):
                 yield sub
 
-def get_batches(data, max_size):
+def get_batches(data, max_size, solo_len=100000):
     data.sort(key=lambda x:-len(x))
     ans = []
     current_start = 0
     current_count = 0
     for i in range(len(data)):
-        if current_count >= max_size or len(data[current_start]) != len(data[i]):
+        if current_count >= max_size or len(data[current_start]) > solo_len or len(data[current_start]) != len(data[i]):
             ans.append(data[current_start: i])
             current_count = 0
             current_start = i

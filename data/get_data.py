@@ -26,11 +26,11 @@ if not os.path.exists(PATH+"train"): os.makedirs(PATH+"train")
 if not os.path.exists(PATH+"valid"): os.makedirs(PATH+"valid")
 if not os.path.exists(PATH+"test"): os.makedirs(PATH+"test")
 if not os.path.exists(PATH+"vocabularies"): os.makedirs(PATH+"vocabularies")
+RAW_DL_PATH = PATH+"raw/raw_download.tar.gz"
 
 ## download raw
 if args.download:
-    if args.language == "chinese": raise Exception("""Sorry - this data is distributed by LDC.
-                                                    Please follow the instructions in GET_CHINESE.txt instead!""")
+    if args.language == "chinese": raise Exception("""Sorry - this data is distributed by LDC.""")
 
     ### helper functions to download files (https://stackoverflow.com/questions/2028517/python-urllib2-progress-hook)
     def chunk_report(bytes_so_far, chunk_size, total_size):
@@ -61,14 +61,13 @@ if args.download:
         return bytes_so_far
     ###
 
-    RAW_DL_PATH = PATH+"raw/raw_download.tar.gz"
     print "Downloading from %s to %s..." % (DATA_URL, RAW_DL_PATH)
     response = urlopen(DATA_URL)
     with open(RAW_DL_PATH, 'wb') as f:
         chunk_read(response, f, report_hook=chunk_report)
 
-    print "Extracting...",
-    tar = tarfile.open(RAW_DL_PATH, "r:gz")
-    tar.extractall(path=PATH+'raw')
-    tar.close()
-    print "done."
+print "Extracting...",
+tar = tarfile.open(RAW_DL_PATH, "r:gz")
+tar.extractall(path=PATH+'raw')
+tar.close()
+print "done."

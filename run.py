@@ -29,6 +29,7 @@ parser.add_argument("--minibatch_size", default=None, type=int, help="size of mi
 
 parser.add_argument("--ptb", action="store_true", help="run on ptb data")
 parser.add_argument("--zh", action="store_true", help="chinese gmw data")
+parser.add_argument("--max_batched_sentence_len", default=125, type=int, help="if a sentence is above this length, it gets its own batch")
 
 parser.add_argument("--log_train_every_n", default=100, type=int, help="how often to log training loss")
 parser.add_argument("--log_valid_every_n", default=2000, type=int, help="how often to evaluate on validation set, log the loss, and potentially save off the model")
@@ -198,8 +199,8 @@ else: raise Exception("unrecognized mode")
 if args.load: model.load("models/"+args.load)
 
 if not args.evaluate and not args.debug:
-    train_batches = util.get_batches(train_data, args.minibatch_size)
-    valid_batches = util.get_batches(valid_data, args.minibatch_size)
+    train_batches = util.get_batches(train_data, args.minibatch_size, args.max_batched_sentence_len)
+    valid_batches = util.get_batches(valid_data, args.minibatch_size, args.max_batched_sentence_len)
 
 best_score = None
 args.update_num = 0
@@ -262,7 +263,7 @@ for epoch_i in range(args.epochs):
 
 # Test evaluation
 test_data = util.load_data(args.test_data, DATA_VIEW, args.start_token, args.end_token)
-test_batches = util.get_batches(test_data, args.minibatch_size)
+test_batches = util.get_batches(test_data, args.minibatch_size, args.max_batched_sentence_len)
 if not args.debug:
     test_accumulator = Accumulator(accs, disps)
     _start = time.time()
