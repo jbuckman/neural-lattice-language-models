@@ -65,7 +65,8 @@ def get_batches(data, max_size, solo_len=100000):
     current_start = 0
     current_count = 0
     for i in range(len(data)):
-        if current_count >= max_size or len(data[current_start]) > solo_len or len(data[current_start]) != len(data[i]):
+        if current_count >= max_size or len(data[current_start]) != len(data[i])\
+                or (len(data[current_start]) > solo_len and current_start != i):
             ans.append(data[current_start: i])
             current_count = 0
             current_start = i
