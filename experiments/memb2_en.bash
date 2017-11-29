@@ -1,1 +1,1 @@
-python run.py --experiment --dynet-devices CPU,GPU:2,GPU:3 --actual-devices=GPU:2,GPU:2,GPU:3,GPU:3 --mode=memb --multi_size=2 --size=large --name=memb2_en
+python run.py --experiment --dynet-devices CPU,GPU:4,GPU:5 --actual-devices=GPU:4,GPU:4,GPU:5,GPU:5 --mode=memb --multi_size=2 --size=large --name=memb2_en

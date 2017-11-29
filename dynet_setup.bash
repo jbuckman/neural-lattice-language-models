@@ -17,8 +17,8 @@ apt-get install -y nvidia-384 nvidia-384-dev nvidia-modprobe nvidia-opencl-icd-3
 CUDA_VERSION_MAJOR="8" CUDA_VERSION_MINOR="0"
 CUDA_PKG_LONGVERSION="${CUDA_VERSION_MAJOR}.${CUDA_VERSION_MINOR}.61-1"
 CUDA_PKG_VERSION="${CUDA_VERSION_MAJOR}-${CUDA_VERSION_MINOR}"
-CUDA_REPO_PKG=cuda-repo-ubuntu1404_${CUDA_PKG_LONGVERSION}_amd64.deb
-wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1404/x86_64/$CUDA_REPO_PKG
+CUDA_REPO_PKG=cuda-repo-ubuntu1604_${CUDA_PKG_LONGVERSION}_amd64.deb
+wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/$CUDA_REPO_PKG
 dpkg -i $CUDA_REPO_PKG
 apt-get -y update
 apt-get install -y --no-install-recommends cuda-drivers cuda-core-$CUDA_PKG_VERSION cuda-cudart-dev-$CUDA_PKG_VERSION cuda-cublas-dev-$CUDA_PKG_VERSION cuda-curand-dev-$CUDA_PKG_VERSION
