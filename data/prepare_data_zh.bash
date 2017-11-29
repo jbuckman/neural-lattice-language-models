@@ -8,5 +8,5 @@ mv zh/raw/projects/lattice-lm/data/gmw/valid zh/
 mv zh/raw/projects/lattice-lm/data/gmw/test zh/
 mv zh/raw/projects/lattice-lm/data/gmw/vocabularies zh/
 
-mv zh/raw/projects/lattice-lm/data/gmw/vocabularies/2.ngrams.toks zh/raw/projects/lattice-lm/data/gmw/vocabularies/2.toks
-mv zh/raw/projects/lattice-lm/data/gmw/vocabularies/2,3.ngrams.toks zh/raw/projects/lattice-lm/data/gmw/vocabularies/2,3.toks
+mv zh/vocabularies/2.ngrams.toks zh/vocabularies/2.toks
+mv zh/vocabularies/2,3.ngrams.toks zh/vocabularies/2,3.toks
