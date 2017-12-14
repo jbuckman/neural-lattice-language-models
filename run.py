@@ -34,7 +34,7 @@ parser.add_argument("--max_batched_sentence_len", default=125, type=int, help="i
 parser.add_argument("--log_train_every_n", default=100, type=int, help="how often to log training loss")
 parser.add_argument("--log_valid_every_n", default=2000, type=int, help="how often to evaluate on validation set, log the loss, and potentially save off the model")
 
-parser.add_argument("--load", help="location to load model from")
+parser.add_argument("--load", action="store_true", help="whether to load model")
 parser.add_argument("--save", help="location to save model to")
 parser.add_argument("--output", help="location to output log to")
 parser.add_argument("--name", help="use default locations to save and log")
@@ -196,7 +196,7 @@ elif args.mode == "lattice": lm = models.LatticeLanguageModel(model, args, vocab
 elif args.mode == "memb": lm = models.MultiEmbLanguageModel(model, args, vocab)
 else: raise Exception("unrecognized mode")
 
-if args.load: model.load("models/"+args.load)
+if args.load: model.populate(args.save)
 
 if not args.evaluate and not args.debug:
     train_batches = util.get_batches(train_data, args.minibatch_size, args.max_batched_sentence_len)
